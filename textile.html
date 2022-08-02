@@ -96,6 +96,8 @@ function conver_tistory(){
 	source_string = source_string.replaceAll('<pre><code class="sql">\n', '<pre class="sql"><code>');
 	source_string = source_string.replaceAll('<pre><code class="python">\n', '<pre class="python"><code>');
 	source_string = source_string.replaceAll('<pre><code class="pascal">\n', '<pre class="pascal"><code>');
+	source_string = source_string.replaceAll('<pre><code class="javascript">\n', '<pre class="javascript"><code>');
+	source_string = source_string.replaceAll('<pre><code class="bash">\n', '<pre class="bash"><code>');
 	elm_target_txt.value = source_string + '<br /><br /><br />'
 }
 </script>
