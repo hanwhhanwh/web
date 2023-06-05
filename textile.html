@@ -137,8 +137,8 @@ function conver_sql2textile(){
 	source_string = source_string.replaceAll('', '');
 	source_string = source_string.replaceAll('', '');
 	source_string = source_string.replaceAll('', '');
-	source_string = source_string.replaceAll('', '');
-	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll("'\n", " |\n");
+	source_string = source_string.replaceAll(' DEFAULT ', ' | ');
 	source_string = source_string.replaceAll('\t', '');
 	elm_target_txt.value = "|_. 컬럼명 |_. 데이터형 |_. NULL |_ 기본값 |_. 설명 |_. 기타 |\n" + source_string
 }
