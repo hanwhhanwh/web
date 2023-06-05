@@ -47,6 +47,8 @@
 		</div>
 		<button id="btn_convert_tistory" class="buttons" title="" type="button" onclick="conver_tistory();"><img class=""
 			src="/e4faaf4b096c99772394de6e9f179563.svg" alt="tistory"></button>
+		<button id="btn_sql2textile" class="buttons" title="" type="button"><img class=""
+					src="/e4faaf4b096c99772394de6e9f179563.svg" alt="SQL -> Textile"></button>
 		<button id="btn_text_cls" class="buttons" title="" type="button"><img class=""
 					src="/e4faaf4b096c99772394de6e9f179563.svg" alt="입력 텍스트 삭제"></button>
 		<p class="text_count">0 / 5000</p>
@@ -99,6 +101,46 @@ function conver_tistory(){
 	source_string = source_string.replaceAll('<pre><code class="javascript">\n', '<pre class="javascript"><code>');
 	source_string = source_string.replaceAll('<pre><code class="bash">\n', '<pre class="bash"><code>');
 	elm_target_txt.value = source_string + '<br /><br /><br />'
+}
+
+/** SQL 컬럼 정의 문자열을 Redmine Textile 문법으로 변경해 줍니다. */
+function conver_sql2textile(){
+	let elm_source_txt = document.querySelector('#txtSource')
+	if (elm_source_txt == null) {
+		alert('SQL 컬럼 정의 문자열 찾지 못하였습니다.');
+		return;
+	}
+
+	let elm_target_txt = document.querySelector('#txtTarget')
+	if (elm_target_txt == null) {
+		alert('변환 처리를 위한 항목을 찾지 못하였습니다.');
+		return;
+	}
+
+	let source_string = elm_source_txt.value;
+	if (source_string.trim() == '') {
+		elm_source_txt.focus();
+		alert('변환할 SQL 컬럼 정의 문자열 내용을 입력하여 주십시오.');
+		return;
+	}
+
+	source_string = source_string.replaceAll("COLLATE 'utf8_general_ci'", "");
+	source_string = source_string.replaceAll('\t`', '| ');
+	source_string = source_string.replaceAll("COMMENT '", "| ");
+	source_string = source_string.replaceAll('`\t', ' | ');
+	source_string = source_string.replaceAll('VARCHAR(', 'VARCHAR (');
+	source_string = source_string.replaceAll('VARBINARY(', 'VARBINARY (');
+	source_string = source_string.replaceAll('BIT(', 'BIT (');
+	source_string = source_string.replaceAll(' NOT NULL ', ' |  | ');
+	source_string = source_string.replaceAll(' NULL DEFAULT ', ' | O | ');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('', '');
+	source_string = source_string.replaceAll('\t', '');
+	elm_target_txt.value = "|_. 컬럼명 |_. 데이터형 |_. NULL |_ 기본값 |_. 설명 |_. 기타 |\n" + source_string
 }
 </script>
 </body>
