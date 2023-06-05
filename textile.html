@@ -124,7 +124,7 @@ function conver_sql2textile(){
 		return;
 	}
 
-	source_string = source_string.replaceAll("COLLATE 'utf8_general_ci'", "");
+	source_string = source_string.replaceAll(" COLLATE 'utf8_general_ci'", "");
 	source_string = source_string.replaceAll('\t`', '| ');
 	source_string = source_string.replaceAll("COMMENT '", "| ");
 	source_string = source_string.replaceAll('`\t', ' | ');
